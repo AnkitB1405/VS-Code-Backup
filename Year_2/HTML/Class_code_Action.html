@@ -1,0 +1,34 @@
+<html>
+    <head>
+        <title>
+            Actions
+        </title>
+        <style>
+            
+            h1
+            {
+                color: black;
+                text-align: center;
+                font-size: 60px;
+            }
+            p
+            {
+                color: white;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Event Form</h1>
+        <form method = "get" action="/submit">
+            <label="Name">Name</label>
+            <input type="text" name="name" required> <br> SRN :
+            <input type="text" name="SRN" required> <br><br> Branch: <br>
+            <input type="checkbox" name="CSE" value="CSE" required>CSE<br>
+            <input type="checkbox" name="ECE" value="ECE" required>ECE<br>
+            <input type="checkbox" name="AIML" value="AIML" required>AIML<br><br>Are You Coming For the event:<br>
+            <input type="radio" name="Choice" value="Male" required> Yeah! <br>
+            <input type="radio" name="Choice" value="Female" required> Heck Yeah!!!<br><br>
+            <input type="submit" name="See You There" value = "See you there">
+        </form>
+    </body>
+</html>
