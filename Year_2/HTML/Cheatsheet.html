@@ -1,0 +1,134 @@
+<!DOCTYPE html>       <!-- Declares the document type as HTML5 -->
+<html>                <!-- Root element of the HTML document -->
+  <head>              <!-- Contains metadata and links to resources -->
+    <title>Title</title> <!-- Sets the title shown in the browser tab -->
+    <meta charset="UTF-8"> <!-- Defines character encoding -->
+    <link rel="stylesheet" href="styles.css"> <!-- Links external CSS file -->
+    <style>/* Internal CSS styles go here */</style>
+    <script src="script.js"></script> <!-- Links external JavaScript file -->
+  </head>
+  <body>              <!-- Contains all visible content on the page -->
+
+    <!-- ✏️ Text & Formatting -->
+    <h1>Heading 1</h1> <!-- Largest heading, used for main titles -->
+    <h2>Heading 2</h2> <!-- Subheading -->
+    ...
+    <h6>Heading 6</h6> <!-- Smallest heading -->
+    <p>Paragraph</p> <!-- Block of text -->
+    <br>               <!-- Line break, no closing tag -->
+    <hr>               <!-- Horizontal line separator -->
+    <strong>Bold</strong> <!-- Important text, semantically strong -->
+    <em>Italic</em>     <!-- Emphasized text, semantically meaningful -->
+    <b>Bold</b>         <!-- Bold text, purely stylistic -->
+    <i>Italic</i>       <!-- Italic text, purely stylistic -->
+    <u>Underline</u>    <!-- Underlined text -->
+    <small>Small text</small> <!-- Smaller font size -->
+    <mark>Highlighted</mark> <!-- Highlighted text -->
+    <sub>Subscript</sub> <!-- Subscript text (e.g., H₂O) -->
+    <sup>Superscript</sup> <!-- Superscript text (e.g., x²) -->
+    <blockquote>Quote</blockquote> <!-- Block-level quotation -->
+    <code>Inline code</code> <!-- Inline monospaced code snippet -->
+    <pre>Preformatted</pre> <!-- Preserves whitespace and formatting -->
+    <abbr title="HyperText Markup Language">HTML</abbr> <!-- Abbreviation with tooltip -->
+    <cite>Source</cite> <!-- Citation for a quote or reference -->
+
+    <!-- 📦 Layout & Structure -->
+    <div>Block container</div> <!-- Generic block-level container -->
+    <span>Inline container</span> <!-- Generic inline container -->
+    <header>Header</header> <!-- Introductory content or navigation -->
+    <footer>Footer</footer> <!-- Footer content (e.g., copyright) -->
+    <main>Main content</main> <!-- Primary content of the document -->
+    <section>Section</section> <!-- Thematic grouping of content -->
+    <article>Article</article> <!-- Self-contained content (e.g., blog post) -->
+    <aside>Sidebar</aside> <!-- Tangential or side content -->
+    <nav>Navigation</nav> <!-- Links for site navigation -->
+
+    <!-- 🔗 Links & Navigation -->
+    <a href="https://example.com">Link</a> <!-- Hyperlink to another page -->
+    <base href="https://example.com/"> <!-- Base URL for relative links -->
+
+    <!-- 🖼️ Media Embedding -->
+    <img src="image.jpg" alt="Description"> <!-- Embeds an image -->
+    <figure> <!-- Container for media with caption -->
+      <img src="pic.jpg">
+      <figcaption>Caption</figcaption> <!-- Describes the image -->
+    </figure>
+    <audio controls> <!-- Embeds audio player -->
+      <source src="sound.mp3" type="audio/mpeg">
+    </audio>
+    <video controls> <!-- Embeds video player -->
+      <source src="video.mp4" type="video/mp4">
+    </video>
+    <embed src="file.swf"> <!-- Embeds external content (e.g., Flash) -->
+    <object data="file.pdf" type="application/pdf"></object> <!-- Embeds external object -->
+    <iframe src="page.html"></iframe> <!-- Embeds another webpage -->
+
+    <!-- 📋 Lists & Tables -->
+    <ul> <!-- Unordered list -->
+      <li>Item</li> <!-- List item -->
+    </ul>
+    <ol> <!-- Ordered list -->
+      <li>Item</li>
+    </ol>
+    <dl> <!-- Description list -->
+      <dt>Term</dt> <!-- Term -->
+      <dd>Description</dd> <!-- Description -->
+    </dl>
+
+    <table> <!-- Table element -->
+      <caption>Table Title</caption> <!-- Table caption -->
+      <thead> <!-- Table header section -->
+        <tr><th>Header</th></tr> <!-- Header row -->
+      </thead>
+      <tbody> <!-- Table body section -->
+        <tr><td>Data</td></tr> <!-- Data row -->
+      </tbody>
+      <tfoot> <!-- Table footer section -->
+        <tr><td>Footer</td></tr>
+      </tfoot>
+      <colgroup> <!-- Defines column group -->
+        <col span="2"> <!-- Specifies column properties -->
+      </colgroup>
+    </table>
+
+    <!-- 🧾 Forms & Inputs -->
+    <form action="/submit"> <!-- Form container -->
+      <label for="name">Name:</label> <!-- Label for input -->
+      <input type="text" id="name" name="name"> <!-- Text input -->
+      <textarea rows="4" cols="50"></textarea> <!-- Multi-line text input -->
+      <select> <!-- Dropdown menu -->
+        <option>Option 1</option> <!-- Option in dropdown -->
+      </select>
+      <button type="submit">Submit</button> <!-- Submit button -->
+      <fieldset> <!-- Group of related inputs -->
+        <legend>Group</legend> <!-- Caption for fieldset -->
+        <!-- Inputs go here -->
+      </fieldset>
+      <datalist id="options"> <!-- Predefined input suggestions -->
+        <option value="HTML">
+      </datalist>
+      <output>Result</output> <!-- Displays calculation result -->
+      <meter value="0.6">60%</meter> <!-- Scalar measurement -->
+      <progress value="70" max="100"></progress> <!-- Progress bar -->
+    </form>
+
+    <!-- 🧠 Semantic & Accessibility -->
+    <details> <!-- Expandable content -->
+      <summary>More info</summary> <!-- Summary shown by default -->
+      Hidden content
+    </details>
+    <dialog open>Dialog box</dialog> <!-- Modal dialog -->
+    <template> <!-- Hidden reusable content -->
+      <div>Reusable content</div>
+    </template>
+    <slot></slot> <!-- Placeholder for Web Components -->
+    <canvas></canvas> <!-- Drawing surface for graphics -->
+
+    <!-- 🧪 Advanced & Meta -->
+    <noscript>JS disabled message</noscript> <!-- Fallback if JS is disabled -->
+    <param name="autoplay" value="true"> <!-- Parameter for embedded object -->
+    <time datetime="2025-08-07">Aug 7, 2025</time> <!-- Machine-readable time -->
+    <data value="123">Product</data> <!-- Machine-readable data -->
+
+  </body>
+</html>
