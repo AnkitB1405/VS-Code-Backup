@@ -1,5 +1,6 @@
 {
     "files.associations": {
         "iostream": "c"
-    }
+    },
+    "dart.showTodos": false
 }
