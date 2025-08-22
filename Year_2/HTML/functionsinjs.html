@@ -1,0 +1,71 @@
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>JavaScript- Import</title>
+        <style>
+            h2
+            {
+                color: red;
+                text-align: center;
+                background-color: black;
+            }
+            .centre-btn
+            {
+                display: flex;
+                justify-content: center;
+                margin-top: 20px;
+            }
+            button
+            {
+                background-color: black;
+                color: white;
+                padding: 10px 20px;
+                cursor: pointer;
+                transition: background-color 0.8s;
+            }
+            button:hover
+            {
+                background-color: green;
+            }
+        </style>
+    </head>
+
+    <body>
+        <h1> Javascipt Functions</h1>
+        <script>
+            function addnumbers(a, b) {
+                return a + b;
+            }
+            function myfunction() {
+                alert("Hello All !!!")
+            }
+            function subtractnumbers(a, b) {
+                return a - b;
+            }
+            let result = addnumbers(5, 10);
+            document.write("The Result of the numbes is " + result);
+            let result2 = subtractnumbers(10, 5);
+            document.write("<br> The Result of the numbes is " + result2);
+            myfunction();
+            function showfunction(a,b)
+            {
+                document.write("<br> The sum of " + a + " and " + b + " is " + addnumbers(a, b));
+            }
+            const arr=[1,2,3,4,5,6,7,8,9,10];
+            document.write("<br>"+arr+"<br>");
+            arr.length = 7;
+            for (i in arr)
+            {
+                document.write(i +"     "+ arr[i]+"<br> ");
+            }
+        </script>
+        <h2> <br> Click the buttoin to display the result<br></h2>
+        <div class="centre-btn">
+        <button onclick="showfunction(20, 30)" autofocus >Click Me</button>
+        </div>
+    </body>
+
+    </html>

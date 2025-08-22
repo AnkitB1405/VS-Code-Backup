@@ -1,0 +1,91 @@
+<html lang="en">
+<head>
+    <title>JavaScript Array Operations Cheatsheet</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        code { background: #f4f4f4; padding: 2px 4px; border-radius: 3px; }
+        h2 { margin-top: 1.5em; }
+    </style>
+</head>
+<body>
+    <h1>JavaScript Array Operations Cheatsheet</h1>
+    <script>
+        var names = ["John", "Jane", "Mary", "Mark"];
+        document.write("<b>Original Array:</b> " + names + "<br><br>");
+
+        // Add to end
+        names.push("Alice");
+        document.write("<b>push('Alice'):</b> " + names + "<br>");
+
+        // Remove from end
+        var last = names.pop();
+        document.write("<b>pop():</b> " + names + " (removed: " + last + ")<br>");
+
+        // Add to start
+        names.unshift("Bob");
+        document.write("<b>unshift('Bob'):</b> " + names + "<br>");
+
+        // Remove from start  
+        var first = names.shift();
+        document.write("<b>shift():</b> " + names + " (removed: " + first + ")<br>");
+
+        // Access by index
+        document.write("<b>names[1]:</b> " + names[1] + "<br>");
+        
+        // concat
+        var moreNames = ["Luke", "Leia"];
+        var combined = names.concat(moreNames);
+        document.write("<b>concat(['Luke', 'Leia']):</b> " + combined + "<br>");
+
+        // Find index
+        var idx = names.indexOf("Mary");
+        document.write("<b>indexOf('Mary'):</b> " + idx + "<br>");
+
+        // Check if includes
+        document.write("<b>includes('Jane'):</b> " + names.includes("Jane") + "<br>");
+
+        // Slice (copy)
+        var sliced = names.slice(1, 3);
+        document.write("<b>slice(1, 3):</b> " + sliced + "<br>");
+
+        // Splice (remove/insert)
+        var spliced = names.splice(1, 1, "Eve");
+        document.write("<b>splice(1, 1, 'Eve'):</b> " + names + " (removed: " + spliced + ")<br>");
+
+        // Join
+        document.write("<b>join(' - '):</b> " + names.join(" - ") + "<br>");
+
+        // Reverse
+        names.reverse();
+        document.write("<b>reverse():</b> " + names + "<br>");
+
+        // Sort
+        names.sort();
+        document.write("<b>sort():</b> " + names + "<br>");
+
+        // forEach
+        document.write("<b>forEach:</b> ");
+        names.forEach(function(name, i) {
+            document.write(i + ":" + name + " ");
+        });
+        document.write("<br>");
+
+        // map
+        var upper = names.map(function(name) { return name.toUpperCase(); });
+        document.write("<b>map (toUpperCase):</b> " + upper + "<br>");
+
+        // filter
+        var filtered = names.filter(function(name) { return name.startsWith("M"); });
+        document.write("<b>filter (startsWith 'M'):</b> " + filtered + "<br>");
+
+        // find
+        var found = names.find(function(name) { return name.length === 4; });
+        document.write("<b>find (length === 4):</b> " + found + "<br>");
+
+        // reduce
+        var totalLength = names.reduce(function(acc, name) { return acc + name.length; }, 0);
+        document.write("<b>reduce (total length):</b> " + totalLength + "<br>");
+
+    </script>
+</body>
+</html>
