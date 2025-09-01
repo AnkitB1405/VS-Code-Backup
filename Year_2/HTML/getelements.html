@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Elements</title>
+</head>
+<body style="text-align: center;">
+    <p>PES UNIVERSITY</p>
+    <button onclick="abcd()">Try it  </button>
+    <script>
+        let adarsh = "black";
+        function abcd() {
+            document.getElementsByTagName("p")[0].style.color = "white";
+            document.getElementsByTagName("p")[0].style.backgroundColor = adarsh;
+        }
+    </script>
+    <h1>The crate element method</h1>
+    <p>This is where we enter a paragraph </p>
+    <button onclick="create()">Click me</button>
+    <script>
+        function create() {
+            const para = document.createElement("p");
+            para.innerText = "This is a new paragraph created dynamically!";
+            document.body.appendChild(para);
+        }
+    </script>
+    
+</body>
+</html>
