@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Personal Profile Form</title>
+    <style>
+        body {
+            background-color: whitesmoke;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 80px;
+        }
+        .form-section, .preview-section {
+            background-color: #f3dcaf2d;
+            border-radius: 12px;
+            padding: 30px 35px;
+            width: 380px;
+            border-color: black;
+            border-style: solid;
+        }
+        .form-section h3 {
+            color: blue;
+        }
+        label {
+            font-weight: 600;
+            margin-top: 18px;
+            display: block;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1.5px solid #7fd3ff;
+            border-radius: 6px;
+            font-size: 16px;
+            margin-bottom: 8px;
+            margin-top: 5px;
+        }
+        textarea {
+            resize: vertical;
+            min-height: 55px;
+            font-family: Arial, sans-serif;
+        }
+        .submit-btn {
+            background: #1666d5;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 10px 0;
+            font-size: 16px;
+            width: 100%;
+            cursor: pointer;
+            margin-top: 16px;
+        }
+        .preview-section h3 {
+            color: blue;
+        }
+        .profile-preview {
+            background: #f5fbee;
+            padding: 20px 20px 18px 20px;
+            border-radius: 8px;
+            margin-top: 8px;
+            font-size: 16px;
+        }
+        .profile-preview b {
+            color: green;
+        }
+        .date-time {
+            color: black;
+            text-align: center;
+            margin-top: 8px;
+            font-size: 13px;
+        }
+        h2 {
+            color: blue;
+            text-align: center;
+            margin-top: 32px;
+            margin-bottom: -10px;
+            font-size: 23px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Smart Personal Profile Form</h2>
+    <div class="date-time" id="datetime"></div>
+    <div class="container">
+        <div class="form-section">
+            <h3>Enter Your Details</h3>
+            <form>
+                <label>Full Name *</label>
+                <input type="text" id="name" required>
+                <label>Email *</label>
+                <input type="email" id="email" required>
+                <label>Phone Number *</label>
+                <input type="text" id="phone" required>
+                <label>Short Bio</label>
+                <textarea id="bio"></textarea>
+                <button type="submit" class="submit-btn">Submit</button>
+            </form>
+        </div>
+        <div class="preview-section">
+            <h3>Live Preview</h3>
+            <div class="profile-preview" id="preview">
+                <b>Name:</b> <span id="prevName"></span><br><br>
+                <b>Email:</b> <span id="prevEmail"></span><br><br>
+                <b>Phone:</b> <span id="prevPhone"></span><br><br>
+                <b>Bio:</b> <span id="prevBio"></span>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.getElementById('name').oninput = function() {
+            document.getElementById('prevName').textContent = this.value;
+        }
+        document.getElementById('email').oninput = function() {
+            document.getElementById('prevEmail').textContent = this.value;
+        }
+        document.getElementById('phone').oninput = function() {
+            document.getElementById('prevPhone').textContent = this.value;
+        }
+        document.getElementById('bio').oninput = function() {
+            document.getElementById('prevBio').textContent = this.value;
+        }
+        function showDateTime() {
+            var rightNow = new Date();
+            var result = "Date & Time: " + (rightNow.getMonth()+1) + "/" + rightNow.getDate() + "/" + rightNow.getFullYear() + ", " + rightNow.toLocaleTimeString();
+            document.getElementById('datetime').textContent = result;
+        }
+        showDateTime();
+    </script>
+</body>
+</html>
