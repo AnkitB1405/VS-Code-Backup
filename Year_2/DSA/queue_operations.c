@@ -57,7 +57,8 @@ void display() {
     printf("\n");
 }
 
-int main() {
+int main() 
+{
     int choice, value;
     while (1) {
         printf("\n--- Queue Operations ---\n");
@@ -85,4 +86,5 @@ int main() {
                 printf("Invalid choice!\n");
         }
     }
-    return
+    return 0;
+}
