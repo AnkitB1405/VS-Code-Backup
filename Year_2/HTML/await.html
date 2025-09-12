@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Async vs Await Example</title>
+</head>
+<body>
+    <h1>Async and Await Demo</h1>
+    <button id="startBtn">Start Async Task</button>
+    <pre id="output"></pre>
+
+    <script>
+        // This function is marked as async
+        async function showMessage() {
+            document.getElementById('output').textContent = "Waiting for 2 seconds...";
+            // 'await' pauses here until the Promise resolves
+            await new Promise(resolve => setTimeout(resolve, 2000));
+            document.getElementById('output').textContent = "Done waiting!";
+        }
+
+        document.getElementById('startBtn').addEventListener('click', showMessage);
+    </script>
+</body>
+</html>

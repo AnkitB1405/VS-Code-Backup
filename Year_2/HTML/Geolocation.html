@@ -1,0 +1,23 @@
+<html>
+    <head>
+        <title> GETLOCATION</title>
+    <style>
+    </style>
+        <script type="text/javascript">
+        function getputs(){
+            navigator.geolocation.watchPosition(show,error);
+        }
+        function show (position){
+            ps=position;
+            document.write("current position:" +position.coords.latitude + "," + position.coords.longitude);
+
+        }
+        function error (error){
+            e=error;
+        }       
+        </script>
+    </head>
+    <body>
+        <button onclick="getputs()">GET LOCATION</button>
+    </body>
+</html>
