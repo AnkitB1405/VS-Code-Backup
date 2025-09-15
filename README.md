@@ -35,17 +35,22 @@ Here’s an overview of the folders:
 1. Clone the repository:
    ```bash
    git clone https://github.com/your-username/VS-Code-Backup.git
+   ```
 Navigate to the folder of interest:
 
 bash
-Copy code
-cd Projects_C
+Copy code:
+```bash
+   cd Projects_C
+```
 Compile & run (example for C):
 
 bash
 Copy code
+```bash
 gcc program.c -o program
 ./program
+```
 For HTML:
 
 Open .html files in your browser or live-server in VS Code.
