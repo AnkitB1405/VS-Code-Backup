@@ -75,6 +75,7 @@ These files are for personal backup and educational purposes only.
 You may use them as reference, but please write and understand your own code for assignments/projects.
 
 ⭐ Acknowledgements
+--
 Professors & classmates for guidance
 
 Open-source community for resources
@@ -82,3 +83,9 @@ Open-source community for resources
 VS Code for being my primary editor
 
 ✨ If you find this repo useful or inspiring, give it a ⭐!
+
+Visualize
+--
+```html
+https://gitdiagram.com/AnkitB1405/VS-Code-Backup
+```
