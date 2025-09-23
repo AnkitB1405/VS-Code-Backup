@@ -8,18 +8,25 @@ struct Node {
 
 void insert_front(struct Node** head, int val) {
     struct Node* newnode = malloc(sizeof(struct Node));
-    newnode->data = val; newnode->prev = NULL; newnode->next = *head;
+    newnode->data = val;
+    newnode->prev = NULL; 
+    newnode->next = *head;
     if (*head) (*head)->prev = newnode;
     *head = newnode;
 }
 
 void insert_end(struct Node** head, int val) {
     struct Node* newnode = malloc(sizeof(struct Node));
-    newnode->data = val; newnode->next = NULL;
-    if(!*head) { newnode->prev = NULL; *head = newnode; return; }
+    newnode->data = val; 
+    newnode->next = NULL;
+    if(!*head) { 
+        newnode->prev = NULL; 
+        *head = newnode; 
+        return; }
     struct Node* temp = *head;
     while(temp->next) temp = temp->next;
-    temp->next = newnode; newnode->prev = temp;
+    temp->next = newnode; 
+    newnode->prev = temp;
 }
 
 void delete_value(struct Node** head, int val) {
