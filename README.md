@@ -35,17 +35,22 @@ Here’s an overview of the folders:
 1. Clone the repository:
    ```bash
    git clone https://github.com/your-username/VS-Code-Backup.git
+   ```
 Navigate to the folder of interest:
 
 bash
-Copy code
-cd Projects_C
+Copy code:
+```bash
+   cd Projects_C
+```
 Compile & run (example for C):
 
 bash
 Copy code
+```bash
 gcc program.c -o program
 ./program
+```
 For HTML:
 
 Open .html files in your browser or live-server in VS Code.
@@ -70,6 +75,7 @@ These files are for personal backup and educational purposes only.
 You may use them as reference, but please write and understand your own code for assignments/projects.
 
 ⭐ Acknowledgements
+--
 Professors & classmates for guidance
 
 Open-source community for resources
@@ -77,3 +83,9 @@ Open-source community for resources
 VS Code for being my primary editor
 
 ✨ If you find this repo useful or inspiring, give it a ⭐!
+
+Visualize
+--
+```html
+https://gitdiagram.com/AnkitB1405/VS-Code-Backup
+```
