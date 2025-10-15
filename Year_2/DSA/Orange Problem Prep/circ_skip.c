@@ -96,3 +96,43 @@ void skipInsert(struct SkipList* list, int value) {
         }
     }
 }
+
+// ...existing code...
+
+// Circular Doubly Linked List
+struct CDNode {
+    int data;
+    struct CDNode* next;
+    struct CDNode* prev;
+};
+
+void insertCDL(struct CDNode** head, int data) {
+    struct CDNode* newNode = (struct CDNode*)malloc(sizeof(struct CDNode));
+    newNode->data = data;
+    if (*head == NULL) {
+        newNode->next = newNode;
+        newNode->prev = newNode;
+        *head = newNode;
+        return;
+    }
+    struct CDNode* tail = (*head)->prev;
+    newNode->next = *head;
+    newNode->prev = tail;
+    tail->next = newNode;
+    (*head)->prev = newNode;
+}
+
+void printCDL(struct CDNode* head) {
+    if (head == NULL) {
+        printf("List is empty.\n");
+        return;
+    }
+    struct CDNode* temp = head;
+    do {
+        printf("%d ", temp->data);
+        temp = temp->next;
+    } while (temp != head);
+    printf("\n");
+}
+
+// ...existing code...
