@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Express Form Demo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    form {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    input {
+      display: block;
+      margin-bottom: 15px;
+      width: 100%;
+      padding: 10px;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <form action="/submit" method="POST">
+    <h2>Enter Your Details</h2>
+    <input type="text" name="name" placeholder="Enter Name" required />
+    <input type="email" name="email" placeholder="Enter Email" required />
+    <button type="submit">Submit</button>
+  </form>
+</body>
+</html>
