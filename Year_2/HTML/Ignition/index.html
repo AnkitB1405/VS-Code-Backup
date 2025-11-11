@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automotive CTF Challenges</title>
+    <style>
+        :root {
+  /* Primitive Color Tokens */
+  --color-white: rgba(255, 255, 255, 1);
+  --color-black: rgba(0, 0, 0, 1);
+  --color-cream-50: rgba(252, 252, 249, 1);
+  --color-cream-100: rgba(255, 255, 253, 1);
+  --color-gray-200: rgba(245, 245, 245, 1);
+  --color-gray-300: rgba(167, 169, 169, 1);
+  --color-gray-400: rgba(119, 124, 124, 1);
+  --color-slate-500: rgba(98, 108, 113, 1);
+  --color-brown-600: rgba(94, 82, 64, 1);
+  --color-charcoal-700: rgba(31, 33, 33, 1);
+  --color-charcoal-800: rgba(38, 40, 40, 1);
+  --color-slate-900: rgba(19, 52, 59, 1);
+  --color-teal-300: rgba(50, 184, 198, 1);
+  --color-teal-400: rgba(45, 166, 178, 1);
+  --color-teal-500: rgba(33, 128, 141, 1);
+  --color-teal-600: rgba(29, 116, 128, 1);
+  --color-teal-700: rgba(26, 104, 115, 1);
+  --color-teal-800: rgba(41, 150, 161, 1);
+  --color-red-400: rgba(255, 84, 89, 1);
+  --color-red-500: rgba(192, 21, 47, 1);
+  --color-orange-400: rgba(230, 129, 97, 1);
+  --color-orange-500: rgba(168, 75, 47, 1);
+
+  /* RGB versions for opacity control */
+  --color-brown-600-rgb: 94, 82, 64;
+  --color-teal-500-rgb: 33, 128, 141;
+  --color-slate-900-rgb: 19, 52, 59;
+  --color-slate-500-rgb: 98, 108, 113;
+  --color-red-500-rgb: 192, 21, 47;
+  --color-red-400-rgb: 255, 84, 89;
+  --color-orange-500-rgb: 168, 75, 47;
+  --color-orange-400-rgb: 230, 129, 97;
+
+  /* Background color tokens (Light Mode) */
+  --color-bg-1: rgba(59, 130, 246, 0.08);
+  --color-bg-2: rgba(245, 158, 11, 0.08);
+  --color-bg-3: rgba(34, 197, 94, 0.08);
+  --color-bg-4: rgba(239, 68, 68, 0.08);
+  --color-bg-5: rgba(147, 51, 234, 0.08);
+  --color-bg-6: rgba(249, 115, 22, 0.08);
+  --color-bg-7: rgba(236, 72, 153, 0.08);
+  --color-bg-8: rgba(6, 182, 212, 0.08);
+
+  /* Semantic Color Tokens (Light Mode) */
+  --color-background: var(--color-cream-50);
+  --color-surface: var(--color-cream-100);
+  --color-text: var(--color-slate-900);
+  --color-text-secondary: var(--color-slate-500);
+  --color-primary: var(--color-teal-500);
+  --color-primary-hover: var(--color-teal-600);
+  --color-primary-active: var(--color-teal-700);
+  --color-secondary: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-secondary-hover: rgba(var(--color-brown-600-rgb), 0.2);
+  --color-secondary-active: rgba(var(--color-brown-600-rgb), 0.25);
+  --color-border: rgba(var(--color-brown-600-rgb), 0.2);
+  --color-btn-primary-text: var(--color-cream-50);
+  --color-card-border: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-card-border-inner: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-error: var(--color-red-500);
+  --color-success: var(--color-teal-500);
+  --color-warning: var(--color-orange-500);
+  --color-info: var(--color-slate-500);
+  --color-focus-ring: rgba(var(--color-teal-500-rgb), 0.4);
+  --color-select-caret: rgba(var(--color-slate-900-rgb), 0.8);
+
+  /* Common style patterns */
+  --focus-ring: 0 0 0 3px var(--color-focus-ring);
+  --focus-outline: 2px solid var(--color-primary);
+  --status-bg-opacity: 0.15;
+  --status-border-opacity: 0.25;
+
+  /* RGB versions for opacity control */
+  --color-success-rgb: 33, 128, 141;
+  --color-error-rgb: 192, 21, 47;
+  --color-warning-rgb: 168, 75, 47;
+  --color-info-rgb: 98, 108, 113;
+
+  /* Typography */
+  --font-family-base: "FKGroteskNeue", "Geist", "Inter", -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-family-mono: "Berkeley Mono", ui-monospace, SFMono-Regular, Menlo,
+    Monaco, Consolas, monospace;
+  --font-size-xs: 11px;
+  --font-size-sm: 12px;
+  --font-size-base: 14px;
+  --font-size-md: 14px;
+  --font-size-lg: 16px;
+  --font-size-xl: 18px;
+  --font-size-2xl: 20px;
+  --font-size-3xl: 24px;
+  --font-size-4xl: 30px;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 550;
+  --font-weight-bold: 600;
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.5;
+  --letter-spacing-tight: -0.01em;
+
+  /* Spacing */
+  --space-0: 0;
+  --space-1: 1px;
+  --space-2: 2px;
+  --space-4: 4px;
+  --space-6: 6px;
+  --space-8: 8px;
+  --space-10: 10px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-20: 20px;
+  --space-24: 24px;
+  --space-32: 32px;
+
+  /* Border Radius */
+  --radius-sm: 6px;
+  --radius-base: 8px;
+  --radius-md: 10px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.02);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.04),
+    0 2px 4px -1px rgba(0, 0, 0, 0.02);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.04),
+    0 4px 6px -2px rgba(0, 0, 0, 0.02);
+  --shadow-inset-sm: inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.03);
+
+  /* Animation */
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --ease-standard: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Layout */
+  --container-sm: 640px;
+  --container-md: 768px;
+  --container-lg: 1024px;
+  --container-xl: 1280px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-gray-400-rgb: 119, 124, 124;
+    --color-teal-300-rgb: 50, 184, 198;
+    --color-gray-300-rgb: 167, 169, 169;
+    --color-gray-200-rgb: 245, 245, 245;
+
+    --color-bg-1: rgba(29, 78, 216, 0.15);
+    --color-bg-2: rgba(180, 83, 9, 0.15);
+    --color-bg-3: rgba(21, 128, 61, 0.15);
+    --color-bg-4: rgba(185, 28, 28, 0.15);
+    --color-bg-5: rgba(107, 33, 168, 0.15);
+    --color-bg-6: rgba(194, 65, 12, 0.15);
+    --color-bg-7: rgba(190, 24, 93, 0.15);
+    --color-bg-8: rgba(8, 145, 178, 0.15);
+
+    --color-background: var(--color-charcoal-700);
+    --color-surface: var(--color-charcoal-800);
+    --color-text: var(--color-gray-200);
+    --color-text-secondary: rgba(var(--color-gray-300-rgb), 0.7);
+    --color-primary: var(--color-teal-300);
+    --color-primary-hover: var(--color-teal-400);
+    --color-primary-active: var(--color-teal-800);
+    --color-secondary: rgba(var(--color-gray-400-rgb), 0.15);
+    --color-secondary-hover: rgba(var(--color-gray-400-rgb), 0.25);
+    --color-secondary-active: rgba(var(--color-gray-400-rgb), 0.3);
+    --color-border: rgba(var(--color-gray-400-rgb), 0.3);
+    --color-error: var(--color-red-400);
+    --color-success: var(--color-teal-300);
+    --color-warning: var(--color-orange-400);
+    --color-info: var(--color-gray-300);
+    --color-focus-ring: rgba(var(--color-teal-300-rgb), 0.4);
+    --color-btn-primary-text: var(--color-slate-900);
+    --color-card-border: rgba(var(--color-gray-400-rgb), 0.2);
+    --color-card-border-inner: rgba(var(--color-gray-400-rgb), 0.15);
+    --shadow-inset-sm: inset 0 1px 0 rgba(255, 255, 255, 0.1),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+
+    --color-success-rgb: var(--color-teal-300-rgb);
+    --color-error-rgb: var(--color-red-400-rgb);
+    --color-warning-rgb: var(--color-orange-400-rgb);
+    --color-info-rgb: var(--color-gray-300-rgb);
+  }
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family-base);
+  background-color: var(--color-background);
+  color: var(--color-text);
+  line-height: var(--line-height-normal);
+  padding: var(--space-24);
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: var(--space-32);
+}
+
+.header h1 {
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  margin-bottom: var(--space-8);
+}
+
+.header p {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-lg);
+}
+
+.progress-bar {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-card-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-20);
+  margin-bottom: var(--space-24);
+  box-shadow: var(--shadow-sm);
+}
+
+.progress-stats {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-16);
+  flex-wrap: wrap;
+  gap: var(--space-12);
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.stat-label {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-value {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+}
+
+.challenges-overview {
+  display: flex;
+  gap: var(--space-8);
+  flex-wrap: wrap;
+}
+
+.challenge-indicator {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-base);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  border: 2px solid var(--color-border);
+  background-color: var(--color-secondary);
+  transition: all var(--duration-fast) var(--ease-standard);
+}
+
+.challenge-indicator.completed {
+  background-color: var(--color-success);
+  color: var(--color-btn-primary-text);
+  border-color: var(--color-success);
+}
+
+.challenge-indicator.active {
+  background-color: var(--color-primary);
+  color: var(--color-btn-primary-text);
+  border-color: var(--color-primary);
+  transform: scale(1.1);
+}
+
+.challenge-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-card-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-32);
+  box-shadow: var(--shadow-md);
+  margin-bottom: var(--space-24);
+}
+
+.challenge-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--space-20);
+  flex-wrap: wrap;
+  gap: var(--space-12);
+}
+
+.challenge-title {
+  flex: 1;
+  min-width: 200px;
+}
+
+.challenge-title h2 {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--space-8);
+  color: var(--color-text);
+}
+
+.challenge-meta {
+  display: flex;
+  gap: var(--space-12);
+  align-items: center;
+}
+
+.badge {
+  padding: var(--space-6) var(--space-12);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+.badge-difficulty {
+  background-color: var(--color-bg-2);
+  color: var(--color-warning);
+  border: 1px solid rgba(var(--color-warning-rgb), 0.3);
+}
+
+.badge-category {
+  background-color: var(--color-bg-1);
+  color: var(--color-primary);
+  border: 1px solid rgba(var(--color-teal-500-rgb), 0.3);
+}
+
+.badge-points {
+  background-color: var(--color-bg-3);
+  color: var(--color-success);
+  border: 1px solid rgba(var(--color-success-rgb), 0.3);
+}
+
+.challenge-description {
+  background-color: var(--color-bg-8);
+  padding: var(--space-16);
+  border-radius: var(--radius-base);
+  margin-bottom: var(--space-20);
+  border-left: 4px solid var(--color-primary);
+}
+
+.challenge-description p {
+  margin: 0;
+  font-size: var(--font-size-md);
+  line-height: 1.6;
+}
+
+.hint-section {
+  margin-bottom: var(--space-20);
+}
+
+.hint-button {
+  background-color: var(--color-secondary);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  padding: var(--space-10) var(--space-16);
+  border-radius: var(--radius-base);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-standard);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-8);
+}
+
+.hint-button:hover {
+  background-color: var(--color-secondary-hover);
+}
+
+.hint-button:active {
+  background-color: var(--color-secondary-active);
+}
+
+.hint-content {
+  margin-top: var(--space-12);
+  padding: var(--space-16);
+  background-color: var(--color-bg-2);
+  border-radius: var(--radius-base);
+  border-left: 4px solid var(--color-warning);
+  display: none;
+}
+
+.hint-content.show {
+  display: block;
+}
+
+.hint-content p {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-text);
+  font-family: var(--font-family-mono);
+  line-height: 1.6;
+}
+
+.flag-input-section {
+  margin-bottom: var(--space-24);
+}
+
+.flag-format {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-12);
+  font-family: var(--font-family-mono);
+}
+
+.input-group {
+  display: flex;
+  gap: var(--space-12);
+  margin-bottom: var(--space-12);
+}
+
+.flag-input {
+  flex: 1;
+  padding: var(--space-12) var(--space-16);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-base);
+  font-size: var(--font-size-md);
+  font-family: var(--font-family-mono);
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  transition: all var(--duration-fast) var(--ease-standard);
+}
+
+.flag-input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: var(--focus-ring);
+}
+
+.submit-button {
+  padding: var(--space-12) var(--space-24);
+  background-color: var(--color-primary);
+  color: var(--color-btn-primary-text);
+  border: none;
+  border-radius: var(--radius-base);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-standard);
+  white-space: nowrap;
+}
+
+.submit-button:hover {
+  background-color: var(--color-primary-hover);
+}
+
+.submit-button:active {
+  background-color: var(--color-primary-active);
+}
+
+.submit-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.feedback {
+  padding: var(--space-12) var(--space-16);
+  border-radius: var(--radius-base);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
+  display: none;
+}
+
+.feedback.show {
+  display: block;
+}
+
+.feedback.success {
+  background-color: rgba(var(--color-success-rgb), 0.15);
+  color: var(--color-success);
+  border: 1px solid rgba(var(--color-success-rgb), 0.3);
+}
+
+.feedback.error {
+  background-color: rgba(var(--color-error-rgb), 0.15);
+  color: var(--color-error);
+  border: 1px solid rgba(var(--color-error-rgb), 0.3);
+}
+
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-12);
+}
+
+.nav-button {
+  padding: var(--space-12) var(--space-20);
+  background-color: var(--color-secondary);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-base);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-standard);
+}
+
+.nav-button:hover {
+  background-color: var(--color-secondary-hover);
+}
+
+.nav-button:active {
+  background-color: var(--color-secondary-active);
+}
+
+.nav-button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.nav-button.primary {
+  background-color: var(--color-primary);
+  color: var(--color-btn-primary-text);
+  border-color: var(--color-primary);
+}
+
+.nav-button.primary:hover:not(:disabled) {
+  background-color: var(--color-primary-hover);
+}
+
+.nav-button.primary:active:not(:disabled) {
+  background-color: var(--color-primary-active);
+}
+
+.reset-button {
+  padding: var(--space-10) var(--space-16);
+  background-color: transparent;
+  color: var(--color-error);
+  border: 1px solid var(--color-error);
+  border-radius: var(--radius-base);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-standard);
+}
+
+.reset-button:hover {
+  background-color: rgba(var(--color-error-rgb), 0.1);
+}
+
+.completion-screen {
+  text-align: center;
+  padding: var(--space-32);
+  display: none;
+}
+
+.completion-screen.show {
+  display: block;
+}
+
+.completion-screen h2 {
+  font-size: var(--font-size-4xl);
+  color: var(--color-success);
+  margin-bottom: var(--space-16);
+}
+
+.completion-screen p {
+  font-size: var(--font-size-xl);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-24);
+}
+
+.checkmark {
+  font-size: 60px;
+  margin-bottom: var(--space-16);
+}
+
+@media (max-width: 640px) {
+  body {
+    padding: var(--space-16);
+  }
+
+  .challenge-card {
+    padding: var(--space-20);
+  }
+
+  .input-group {
+    flex-direction: column;
+  }
+
+  .challenge-meta {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .stat-value {
+    font-size: var(--font-size-xl);
+  }
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚗 Automotive CTF Challenges 🔐</h1>
+            <p>Test your knowledge of automotive systems &amp; cybersecurity</p>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-stats">
+                <div class="stat">
+                    <span class="stat-label">Progress</span>
+                    <span class="stat-value" id="progress-text">1 of 7</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Total Points</span>
+                    <span class="stat-value" id="total-points">0 / 110</span>
+                </div>
+                <button class="reset-button" onclick="resetAll()">Reset All</button>
+            </div>
+            <div class="challenges-overview" id="challenges-overview"></div>
+        </div>
+
+        <div id="challenge-container"></div>
+
+        <div class="challenge-card completion-screen" id="completion-screen">
+            <div class="checkmark">🏆</div>
+            <h2>Congratulations!</h2>
+            <p>You've completed all 7 challenges!</p>
+            <p>Final Score: <span id="final-score">0</span> points</p>
+            <button class="nav-button primary" onclick="resetAll()">Start Over</button>
+        </div>
+    </div>
+
+    <script>
+        const challenges = [
+            {
+                id: 1,
+                title: "Broken VIN Code",
+                difficulty: "Easy",
+                points: 10,
+                category: "Automobile",
+                description: "A vehicle's VIN (Vehicle Identification Number) has become corrupted. You have a partially valid VIN: 1HGBH41JXMN109186 but the 9th position check digit is missing (marked as X). Calculate the correct check digit using the VIN checksum algorithm. The VIN checksum uses position weights and the standard ISO 3779 algorithm.",
+                hint: "The VIN checksum algorithm uses weighted multiplication: weights are [8,7,6,5,4,3,2,10,0,9,8,7,6,5,4,3,2]. Convert letters to numbers (A=1, B=2... I is skipped, J=1, K=2). Multiply each position by its weight, sum all products, and take modulo 11. The result should be 1-9, X (for 10), or 0.",
+                flag: "1",
+                flagFormat: "FLAG{correctdigit}"
+            },
+            {
+                id: 2,
+                title: "Diagnostic Code Mystery",
+                difficulty: "Easy",
+                points: 10,
+                category: "Automobile",
+                description: "Your car's OBD-II scanner shows this trouble code: P0420. This is a standard diagnostic trouble code (DTC). What does this code indicate? In the format CODE_X_DESCRIPTION where X is the system number (1 for Powertrain) and DESCRIPTION is the issue name.",
+                hint: "P = Powertrain (1), 0 = Generic/OBD2 (1), 4 = Emission System (2), 20 = Specific issue number (3-4). P0420 specifically refers to the catalyst system efficiency being below threshold.",
+                flag: "CODE_1_CATALYST_SYSTEM_EFFICIENCY_BELOW_THRESHOLD",
+                flagFormat: "FLAG{CODE_1_CATALYST_SYSTEM_EFFICIENCY_BELOW_THRESHOLD}"
+            },
+            {
+                id: 3,
+                title: "Message on the Bus",
+                difficulty: "Medium",
+                points: 20,
+                category: "Automobile",
+                description: "You've captured a CAN bus message from a vehicle: ID=0x123 DATA=0A 1F 3C 50 64 repeating every 100ms. By analyzing the pattern of values 10 (0x0A), 31 (0x1F), 60 (0x3C), 80 (0x50), 100 (0x64), all increasing as percentages, determine what vehicle parameter this represents.",
+                hint: "The values represent percentages from 10% to 100% in a linear pattern. Think about what common vehicle parameter the CAN bus monitors that varies from 0-100% based on driver input.",
+                flag: "THROTTLE_POSITION",
+                flagFormat: "FLAG{parameter_name}",
+                alternateFlags: ["ACCELERATOR_PEDAL_POSITION"]
+            },
+            {
+                id: 4,
+                title: "Classic Shift",
+                difficulty: "Easy",
+                points: 10,
+                category: "Cybersecurity",
+                description: "A security engineer encrypted a message using a Caesar cipher with a shift of 3. Each letter is shifted 3 positions forward in the alphabet. Decrypt this message: KHOOR ZRUOG IURP WKH DXWRPRWLYH FLUYH",
+                hint: "To decrypt a Caesar cipher with shift 3, shift each letter BACKWARDS by 3 positions (A becomes X, B becomes Y, etc.). Spaces and numbers remain unchanged.",
+                flag: "HELLO_WORLD_FROM_THE_AUTOMOTIVE_CURVE",
+                flagFormat: "FLAG{decrypted_message}"
+            },
+            {
+                id: 5,
+                title: "Hidden VIN in Code",
+                difficulty: "Medium",
+                points: 20,
+                category: "Automobile+Cybersecurity",
+                description: "A mechanic wrote down a vehicle's VIN using a simple substitution cipher where each letter is mapped to its reverse in the alphabet: A→Z, B→Y, C→X, etc. Numbers remain unchanged. The encrypted VIN is: HXJSW52KLMEV0RFN. Decrypt it to find the real VIN.",
+                hint: "Use reverse alphabet mapping (Atbash cipher): A↔Z, B↔Y, C↔X, D↔W, E↔V, F↔U, G↔T, H↔S, I↔R, J↔Q, K↔P, L↔O, M↔N. Numbers (0-9) stay the same. Apply this to each letter in HXJSW52KLMEV0RFN.",
+                flag: "SCIGD52POVMW0IUM",
+                flagFormat: "FLAG{decrypted_vin}"
+            },
+            {
+                id: 6,
+                title: "Hidden in Plain Sight",
+                difficulty: "Medium",
+                points: 20,
+                category: "Cybersecurity",
+                description: "An OBD-II scan tool logs this hexadecimal data: 48 77 69 73 64 64 65 6E 00 4D 65 73 73 61 67 65. A secret message is hidden in alternating bytes. Extract every other byte starting with the first: 0x48, skip 0x77, take 0x69, skip 0x73, etc. Convert these hex values to ASCII to reveal the flag.",
+                hint: "Extract bytes at positions 1, 3, 5, 7, 9, 11, 13, 15 (every odd position, starting from 1). Convert each hex value to its ASCII character: 0x48=H, 0x69=i, 0x64=d, 0x65=e, etc.",
+                flag: "HIDDEN_MESSAGE",
+                flagFormat: "FLAG{hidden_message}"
+            },
+            {
+                id: 7,
+                title: "Bus Traffic Analysis",
+                difficulty: "Medium",
+                points: 20,
+                category: "Automobile",
+                description: "You're monitoring CAN bus traffic. Three messages have different transmission rates: Message A (every 10ms), Message B (every 25ms), Message C (every 40ms). All start at time 0ms. At what time (in milliseconds) will all three messages arrive simultaneously again?",
+                hint: "You need to find when all three message schedules align. This is the Least Common Multiple (LCM) of 10, 25, and 40. Factor each: 10=2×5, 25=5², 40=2³×5. LCM = 2³×5² = 8×25 = 200ms.",
+                flag: "200",
+                flagFormat: "FLAG{time_in_ms}"
+            }
+        ];
+
+        // State management using JavaScript variables (not localStorage)
+        let currentChallengeIndex = 0;
+        let completedChallenges = [];
+        let totalPoints = 0;
+
+        function initApp() {
+            renderChallengesOverview();
+            renderChallenge();
+            updateProgress();
+        }
+
+        function renderChallengesOverview() {
+            const overview = document.getElementById('challenges-overview');
+            overview.innerHTML = '';
+            
+            challenges.forEach((challenge, index) => {
+                const indicator = document.createElement('div');
+                indicator.className = 'challenge-indicator';
+                indicator.textContent = challenge.id;
+                
+                if (completedChallenges.includes(index)) {
+                    indicator.classList.add('completed');
+                    indicator.textContent = '✓';
+                }
+                
+                if (index === currentChallengeIndex) {
+                    indicator.classList.add('active');
+                }
+                
+                overview.appendChild(indicator);
+            });
+        }
+
+        function renderChallenge() {
+            const container = document.getElementById('challenge-container');
+            const challenge = challenges[currentChallengeIndex];
+            
+            const isCompleted = completedChallenges.includes(currentChallengeIndex);
+            
+            container.innerHTML = `
+                <div class="challenge-card">
+                    <div class="challenge-header">
+                        <div class="challenge-title">
+                            <h2>${challenge.title}</h2>
+                        </div>
+                        <div class="challenge-meta">
+                            <span class="badge badge-difficulty">${challenge.difficulty}</span>
+                            <span class="badge badge-category">${challenge.category}</span>
+                            <span class="badge badge-points">${challenge.points} pts</span>
+                        </div>
+                    </div>
+                    
+                    <div class="challenge-description">
+                        <p>${challenge.description}</p>
+                    </div>
+                    
+                    <div class="hint-section">
+                        <button class="hint-button" onclick="toggleHint()">
+                            💡 Show Hint
+                        </button>
+                        <div class="hint-content" id="hint-content">
+                            <p>${challenge.hint}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flag-input-section">
+                        <div class="flag-format">Format: ${challenge.flagFormat}</div>
+                        <div class="input-group">
+                            <input 
+                                type="text" 
+                                class="flag-input" 
+                                id="flag-input" 
+                                placeholder="Enter flag here..."
+                                ${isCompleted ? 'disabled' : ''}
+                            />
+                            <button 
+                                class="submit-button" 
+                                onclick="submitFlag()"
+                                ${isCompleted ? 'disabled' : ''}
+                            >
+                                Submit Flag
+                            </button>
+                        </div>
+                        <div class="feedback" id="feedback"></div>
+                    </div>
+                    
+                    <div class="navigation">
+                        <button 
+                            class="nav-button" 
+                            onclick="previousChallenge()"
+                            ${currentChallengeIndex === 0 ? 'disabled' : ''}
+                        >
+                            ← Previous
+                        </button>
+                        <button 
+                            class="nav-button primary" 
+                            onclick="nextChallenge()"
+                            ${!isCompleted || currentChallengeIndex === challenges.length - 1 ? 'disabled' : ''}
+                        >
+                            Next Challenge →
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function toggleHint() {
+            const hintContent = document.getElementById('hint-content');
+            hintContent.classList.toggle('show');
+            
+            const button = document.querySelector('.hint-button');
+            if (hintContent.classList.contains('show')) {
+                button.textContent = '💡 Hide Hint';
+            } else {
+                button.textContent = '💡 Show Hint';
+            }
+        }
+
+        function submitFlag() {
+            const input = document.getElementById('flag-input');
+            const feedback = document.getElementById('feedback');
+            const userFlag = input.value.trim();
+            
+            if (!userFlag) {
+                feedback.textContent = 'Please enter a flag!';
+                feedback.className = 'feedback error show';
+                return;
+            }
+            
+            const challenge = challenges[currentChallengeIndex];
+            
+            // Normalize the input - extract content between FLAG{} or just use as-is
+            let normalizedInput = userFlag.toUpperCase();
+            const flagMatch = normalizedInput.match(/FLAG\{(.+?)\}/);
+            if (flagMatch) {
+                normalizedInput = flagMatch[1];
+            }
+            
+            const correctFlag = challenge.flag.toUpperCase();
+            const alternateFlags = challenge.alternateFlags ? challenge.alternateFlags.map(f => f.toUpperCase()) : [];
+            
+            const isCorrect = normalizedInput === correctFlag || alternateFlags.includes(normalizedInput);
+            
+            if (isCorrect) {
+                feedback.textContent = `🎉 Correct! You earned ${challenge.points} points!`;
+                feedback.className = 'feedback success show';
+                
+                if (!completedChallenges.includes(currentChallengeIndex)) {
+                    completedChallenges.push(currentChallengeIndex);
+                    totalPoints += challenge.points;
+                    updateProgress();
+                    renderChallengesOverview();
+                    
+                    // Enable next button
+                    setTimeout(() => {
+                        renderChallenge();
+                        
+                        // Check if all challenges completed
+                        if (completedChallenges.length === challenges.length) {
+                            showCompletionScreen();
+                        }
+                    }, 1500);
+                }
+            } else {
+                feedback.textContent = '❌ Incorrect! Try again or check the hint.';
+                feedback.className = 'feedback error show';
+            }
+        }
+
+        function nextChallenge() {
+            if (currentChallengeIndex < challenges.length - 1) {
+                currentChallengeIndex++;
+                renderChallenge();
+                renderChallengesOverview();
+                updateProgress();
+            }
+        }
+
+        function previousChallenge() {
+            if (currentChallengeIndex > 0) {
+                currentChallengeIndex--;
+                renderChallenge();
+                renderChallengesOverview();
+                updateProgress();
+            }
+        }
+
+        function updateProgress() {
+            document.getElementById('progress-text').textContent = `${currentChallengeIndex + 1} of ${challenges.length}`;
+            document.getElementById('total-points').textContent = `${totalPoints} / 110`;
+        }
+
+        function resetAll() {
+            if (confirm('Are you sure you want to reset all progress?')) {
+                currentChallengeIndex = 0;
+                completedChallenges = [];
+                totalPoints = 0;
+                
+                document.getElementById('completion-screen').classList.remove('show');
+                document.getElementById('challenge-container').style.display = 'block';
+                
+                renderChallenge();
+                renderChallengesOverview();
+                updateProgress();
+            }
+        }
+
+        function showCompletionScreen() {
+            document.getElementById('final-score').textContent = totalPoints;
+            document.getElementById('challenge-container').style.display = 'none';
+            document.getElementById('completion-screen').classList.add('show');
+        }
+
+        // Handle Enter key in input field
+        document.addEventListener('DOMContentLoaded', () => {
+            initApp();
+            
+            document.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    const input = document.getElementById('flag-input');
+                    if (input && document.activeElement === input) {
+                        submitFlag();
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
