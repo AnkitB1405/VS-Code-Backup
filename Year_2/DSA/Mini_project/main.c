@@ -1,16 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stdbool.h> // For the 'bool' type
+#include <stdbool.h> 
 
-// --- 1. DATA STRUCTURES ---
 
-#define FILENAME "library.csv" // Define the database file
-#define MAX_LINE_LEN 256        // Max length for a line in the CSV
 
-/**
- * @brief Structure for the book data
- */
+#define FILENAME "library.csv" 
+#define MAX_LINE_LEN 256       
+
+
 typedef struct Book {
     char isbn[20];
     char title[100];
@@ -18,71 +16,61 @@ typedef struct Book {
     bool isAvailable;
 } Book;
 
-/**
- * @brief Structure for the Binary Search Tree node
- */
+
 typedef struct TreeNode {
     Book data;
     struct TreeNode* left;
     struct TreeNode* right;
 } TreeNode;
 
-// --- 2. CORE BST & UTILITY FUNCTIONS ---
-// (These are the same as before)
+
 
 TreeNode* createNode(Book newBook);
 TreeNode* addBook(TreeNode* root, Book newBook);
 void printBookDetails(Book book);
 TreeNode* searchByISBN(TreeNode* root, const char* isbn);
 
-// --- 3. CSV DATA MANAGEMENT FUNCTIONS (NEW) ---
 
-/**
- * @brief (Helper for saving) Recursively traverses the tree and writes to the file
- */
+
+
 void saveTreeRecursive(FILE* file, TreeNode* node) {
     if (node == NULL) {
         return;
     }
     
-    // Write current node's data in CSV format
+
     fprintf(file, "%s,%s,%s,%d\n",
             node->data.isbn,
             node->data.title,
             node->data.author,
-            node->data.isAvailable ? 1 : 0); // Write 1 for true, 0 for false
+            node->data.isAvailable ? 1 : 0);
             
-    // Recurse on children
+  
     saveTreeRecursive(file, node->left);
     saveTreeRecursive(file, node->right);
 }
 
-/**
- * @brief Saves the entire BST to the CSV file (overwrites existing file)
- */
+
 void saveDataToFile(TreeNode* root, const char* filename) {
-    FILE* file = fopen(filename, "w"); // "w" = write mode (creates or overwrites)
+    FILE* file = fopen(filename, "w"); 
     if (file == NULL) {
         printf("Error: Could not open file %s for writing.\n", filename);
         return;
     }
 
     printf("Saving data to %s...\n", filename);
-    saveTreeRecursive(file, root); // Call the recursive helper
+    saveTreeRecursive(file, root);
     
     fclose(file);
     printf("Data saved successfully.\n");
 }
 
-/**
- * @brief Loads data from the CSV file and builds the BST
- * @return The root of the newly created BST
- */
+
 TreeNode* loadDataFromFile(const char* filename) {
-    FILE* file = fopen(filename, "r"); // "r" = read mode
+    FILE* file = fopen(filename, "r"); 
     if (file == NULL) {
         printf("Info: No existing '%s' found. Starting a new library.\n", filename);
-        return NULL; // Return an empty tree
+        return NULL;
     }
 
     printf("Loading data from %s...\n", filename);
@@ -93,30 +81,30 @@ TreeNode* loadDataFromFile(const char* filename) {
         Book newBook;
         char* token;
 
-        // Strip newline character if present
+        
         line[strcspn(line, "\n")] = 0;
 
-        // 1. Get ISBN
+        
         token = strtok(line, ",");
-        if (token == NULL) continue; // Skip empty/malformed line
+        if (token == NULL) continue; 
         strcpy(newBook.isbn, token);
 
-        // 2. Get Title
+    
         token = strtok(NULL, ",");
         if (token == NULL) continue;
         strcpy(newBook.title, token);
 
-        // 3. Get Author
+       
         token = strtok(NULL, ",");
         if (token == NULL) continue;
         strcpy(newBook.author, token);
 
-        // 4. Get Availability
+       
         token = strtok(NULL, ",");
         if (token == NULL) continue;
-        newBook.isAvailable = (atoi(token) == 1); // Convert "1" or "0" string to bool
+        newBook.isAvailable = (atoi(token) == 1); 
 
-        // Add the loaded book to the tree
+        
         root = addBook(root, newBook);
     }
 
@@ -126,8 +114,7 @@ TreeNode* loadDataFromFile(const char* filename) {
 }
 
 
-// --- 4. LIBRARY FUNCTIONALITIES ---
-// (These are the same as before)
+
 
 void borrowBook(TreeNode* root, const char* isbn);
 void returnBook(TreeNode* root, const char* isbn);
@@ -137,14 +124,13 @@ void displayAllBooks(TreeNode* root);
 void freeTree(TreeNode* root);
 
 
-// --- 5. MAIN FUNCTION (MODIFIED) ---
 
 int main() {
-    TreeNode* root = NULL; // Start with an empty tree
+    TreeNode* root = NULL;
     int choice;
     char isbn[20], title[100], author[100];
 
-    // --- Load data from CSV file ---
+ 
     root = loadDataFromFile(FILENAME);
 
     do {
@@ -181,17 +167,20 @@ int main() {
                 newBook.isAvailable = true;
                 
                 root = addBook(root, newBook);
+                saveDataToFile(root, FILENAME);
                 printf("Book added!\n");
                 break;
             case 2:
                 printf("Enter ISBN to borrow: ");
                 fgets(isbn, 20, stdin); isbn[strcspn(isbn, "\n")] = 0;
                 borrowBook(root, isbn);
+                saveDataToFile(root, FILENAME);
                 break;
             case 3:
                 printf("Enter ISBN to return: ");
                 fgets(isbn, 20, stdin); isbn[strcspn(isbn, "\n")] = 0;
                 returnBook(root, isbn);
+                saveDataToFile(root, FILENAME);
                 break;
             case 4:
                 printf("Enter Title to search: ");
@@ -219,18 +208,16 @@ int main() {
         }
     } while (choice != 0);
 
-    // --- Save data back to CSV file before exiting ---
     saveDataToFile(root, FILENAME);
 
-    // Clean up allocated memory
     freeTree(root);
     
     return 0;
 }
 
 
-// --- FUNCTION IMPLEMENTATIONS (UNCHANGED) ---
-// (Paste all the helper functions from the previous answer here)
+
+
 
 TreeNode* createNode(Book newBook) {
     TreeNode* newNode = (TreeNode*)malloc(sizeof(TreeNode));
@@ -254,6 +241,7 @@ void printBookDetails(Book book) {
 }
 
 TreeNode* addBook(TreeNode* root, Book newBook) {
+
     if (root == NULL) {
         return createNode(newBook);
     }
@@ -263,9 +251,9 @@ TreeNode* addBook(TreeNode* root, Book newBook) {
     } else if (cmp > 0) {
         root->right = addBook(root->right, newBook);
     } else {
-        // No error print here, as it's noisy when loading from file
-        // If you want to see duplicates on *manual* add, move the
-        // printf("Error: Book... exists") to the 'case 1' in main.
+
+        strcpy(root->data.title, newBook.title);
+
     }
     return root;
 }
