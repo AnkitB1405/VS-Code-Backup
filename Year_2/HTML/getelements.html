@@ -25,6 +25,23 @@
             document.body.appendChild(para);
         }
     </script>
-    
+    <h1>Remove element method</h1>
+    <p>This is where we enter a paragraph </p>
+    <button onclick="remove()">Click me</button>
+    <script>
+        function remove() {
+            const para = document.getElementsByTagName("p")[0];
+            document.body.removeChild(para);
+        }
+    </script>
+    <h1>Replace element method</h1>
+    <p>This is where we enter a paragraph </p>
+    <button onclick="replace()">Click me</button>
+    <script>
+        function replace() {
+            const para = document.getElementsByTagName("p")[0];
+            document.body.replaceChild(para);
+        }
+    </script>
 </body>
 </html>
