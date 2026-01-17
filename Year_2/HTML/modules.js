@@ -1,7 +1,7 @@
 function printline(){
     console.log("Hello World!");
 }
-//var timer = setInterval(printline, 2000); Uncomment to see Hello World every 2 seconds
+//var timer = setInterval(printline, 2000); //Uncomment to see Hello World every 2 seconds
 
 // Importing the module
 var date = require('./export_modules.js');
