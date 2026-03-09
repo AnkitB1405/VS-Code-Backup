@@ -8,7 +8,7 @@ const Contact = () => {
       <SectionTitle
         eyebrow="Contact"
         title="Let us build something exceptional"
-        description="Reach out for collaborations, internships, freelance work, or frontend engineering opportunities."
+        description="Reach out for collaborations, internships, freelance work, or fun and interesting cybersecurity projects."
       />
 
       <div className="grid gap-4 md:grid-cols-3">

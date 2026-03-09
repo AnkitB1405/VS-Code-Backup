@@ -49,6 +49,42 @@ body {
   outline: none;
 }
 
+.status-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  background: #34d399;
+  box-shadow: 0 0 8px rgba(52, 211, 153, 0.85);
+  animation: pulse-dim 1.8s ease-in-out infinite;
+}
+
+.status-glow-text {
+  text-shadow: 0 0 10px rgba(52, 211, 153, 0.4);
+  animation: text-dim 1.8s ease-in-out infinite;
+}
+
+@keyframes pulse-dim {
+  0%,
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 10px rgba(52, 211, 153, 0.9);
+  }
+  50% {
+    opacity: 0.45;
+    box-shadow: 0 0 2px rgba(52, 211, 153, 0.35);
+  }
+}
+
+@keyframes text-dim {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+
 @media (max-width: 768px) {
   .section-shell {
     padding-block: 3.5rem;

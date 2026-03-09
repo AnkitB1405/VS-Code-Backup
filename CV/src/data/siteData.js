@@ -35,7 +35,7 @@ export const education = {
 };
 
 export const skills = {
-  programmingLanguages: ['Python', 'C', 'JavaScript', 'Bash / Shell', 'Powershell'],
+  programmingLanguages: ['Python', 'C', 'Bash / Shell', 'Powershell'],
   webTechnologies: ['HTML5', 'JavaScript'],
   toolsAndTechnologies: ['Docker', 'Git', 'Linux', 'VS Code'],
   otherTechnicalInterests: [
@@ -59,6 +59,22 @@ export const projects = [
     description:
       'A student activity, budgeting, and progress tracking application designed to help students manage tasks, finances, and personal productivity.',
     techStack: ['JavaScript', 'HTML5'],
+    github: '',
+    demo: ''
+  },
+  {
+    title: 'Active Cyber Deception',
+    status: 'in-progress',
+    statusLabel: 'In Progress',
+    description:
+      'Honeypot-based cybersecurity system designed to capture and analyze attacker behavior and surface vulnerabilities and potential attack paths through a Wazuh dashboard.',
+    keyFeatures: [
+      'Deploys honeypot services to attract and log malicious activity.',
+      'Collects and analyzes attack telemetry from adversary interactions.',
+      'Integrates with Wazuh SIEM for visualization, alerting, and analysis.',
+      'Helps identify vulnerabilities and potential exploitation paths.'
+    ],
+    techStack: ['Cybersecurity', 'Honeypot', 'Wazuh SIEM', 'Telemetry Analysis'],
     github: '',
     demo: ''
   }
