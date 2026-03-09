@@ -6,7 +6,7 @@ const Awards = () => {
     <section id="awards" className="section-shell">
       <SectionTitle
         eyebrow="Highlights"
-        title="Awards, Achievements & Hackathons"
+        title="Certificates, Achievements & Hackathons"
         description="This section is ready for future additions."
       />
 

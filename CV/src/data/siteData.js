@@ -21,9 +21,9 @@ export const profile = {
   linkedin: 'https://www.linkedin.com/in/ankit-bembalgi-b65b55297/',
   resumeUrl: '/resume.pdf',
   heroHighlights: [
-    'CTF Problem Solving',
-    'Homelab & Self-Hosted Systems',
-    'Linux & Security Workflows'
+    'Offensive Security & CTF Challenges',
+    'Homelab Infrastructure Engineering',
+    'Linux Systems & Automation'
   ]
 };
 
@@ -49,7 +49,13 @@ export const projects = [
   {
     title: 'HomeLab',
     description:
-      'Personal homelab environment used for experimentation with self-hosted services, containers, networking setups, and development workflows.',
+      'Personal homelab environment for hands-on experimentation with self-hosting, virtualization, containerized services, and networking workflows. It serves as a controlled sandbox to test tools, practice system administration, and automate deployments while keeping services stable through container isolation.',
+    keyFeatures: [
+      'Proxmox-based virtualization for efficient resource management.',
+      'Containerized services for testing infrastructure and self-hosted tools.',
+      'Automation workflows using n8n in dedicated containers.',
+      'Environment for locally hosted AI models and developer tooling.'
+    ],
     techStack: ['Linux', 'Docker', 'Networking'],
     github: '',
     demo: ''
@@ -57,7 +63,13 @@ export const projects = [
   {
     title: 'LifeHub',
     description:
-      'A student activity, budgeting, and progress tracking application designed to help students manage tasks, finances, and personal productivity.',
+      'LifeHub is a student-focused productivity platform that combines planning, budgeting, and progress tracking in one workspace. It is designed to help manage tasks, goals, and spending with a clean, maintainable architecture that supports feature growth and long-term usability.',
+    keyFeatures: [
+      'Unified dashboard for tasks, planning, and progress visibility.',
+      'Budgeting and expense tracking for better spending awareness.',
+      'Goal and milestone tracking with clear progress indicators.',
+      'Modular architecture designed for future feature expansion.'
+    ],
     techStack: ['JavaScript', 'HTML5'],
     github: '',
     demo: ''
