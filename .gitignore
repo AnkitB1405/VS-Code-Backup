@@ -12,4 +12,5 @@ node_modules/
 .DS_Store
 .env
 Lex_Yacc/ 
-Cowrie_Setup/ 
+Cowrie_Setup/
+CV/
